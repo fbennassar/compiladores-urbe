@@ -1,0 +1,36 @@
+Visual DONE
+
+Que se cree el objeto producto DONE
+
+Que se muestre en la tabla DONE
+
+Tomar objetos de la tabla DONE
+
+parte de validaciones {
+
+Cantidad no puede ser negativa DONE
+
+Codigo no se repite DONE
+
+Precio no puede ser 0 ni negativo DONE
+
+Boton limpiar DONE
+
+Actualizar datos de tabla DONE
+
+Aplicar IVA DONE
+
+Colocar tasa de cambio en "Ayuda" DONE
+
+Boton para cambiar los precios entre dolares y bolivares DONE
+}
+
+Acerca de DONE
+
+Crear archivo DONE
+
+Abrir archivo ON DEV
+
+zxzx
+olii
+dsfsfsd
