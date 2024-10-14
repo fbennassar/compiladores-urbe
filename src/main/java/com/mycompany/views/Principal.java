@@ -34,9 +34,9 @@ public class Principal extends JFrame {
     private JTextArea textArea;
     private JMenu menuWorkSpace;
     private Notepad notepad;
-    private String currentFileName; // Variable to store the full path of the current file
-    private JLabel lblArchivoActual; // Label to display the current file name
-    private JLabel lblContador; // Label to display the character count
+    private String currentFileName;
+    private JLabel lblArchivoActual;
+    private JLabel lblContador; // Label que muestra el conteo de caracteres
 
     /**
      * Launch the application.
@@ -94,11 +94,11 @@ public class Principal extends JFrame {
         textArea = new JTextArea();
         scrollPane.setViewportView(textArea);
 
-        lblArchivoActual = new JLabel("Archivo actual: "); // Initialize the label
-        lblContador = new JLabel("Caracteres: 0"); // Initialize the character count label
+        lblArchivoActual = new JLabel("Archivo actual: "); 
+        lblContador = new JLabel("Caracteres: 0"); 
 
         
-        // Add a DocumentListener to the text area to update the character count
+        // Document Listener para actualizar el conteo de caracteres
         textArea.getDocument().addDocumentListener(new DocumentListener() {
             public void insertUpdate(DocumentEvent e) {
                 updateCharacterCount();
@@ -143,31 +143,31 @@ public class Principal extends JFrame {
 
         notepad = new Notepad();
 
-        // Function to create a new file
+        // Action Listener para los items del menu
         menuNuevoArchivo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
-                    String fileName = notepad.nuevoArchivo(""); // Create the new file in the file system
+                    String fileName = notepad.nuevoArchivo(""); // Crea un nuevo archivo
                     if (fileName != null) {
-                        currentFileName = fileName; // Update the full path of the current file
-                        // Update the text area and workspace
+                        currentFileName = fileName; // Actualiza el nombre y ruta del archivo actual
+                        // Pone en blanco el contenido del textArea
                         textArea.setText("");
-                        // Add a new item to the workspace menu
+                        // Coloca el item en el WorkSpace
                         JMenuItem fileItem = new JMenuItem(new File(fileName).getName());
                         fileItem.addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent event) {
                                 String content = notepad.getFileContent(fileName);
                                 if (content != null) {
                                     textArea.setText(content);
-                                    currentFileName = fileName; // Update the full path of the current file
-                                    lblArchivoActual.setText("Archivo actual: " + new File(fileName).getName()); // Update the label
-                                    updateCharacterCount(); // Update the character count
+                                    currentFileName = fileName;
+                                    lblArchivoActual.setText("Archivo actual: " + new File(fileName).getName()); // Actualiza el label de archivo actual
+                                    updateCharacterCount(); // Actualiza el contador de caracteres
                                 }
                             }
                         });
                         menuWorkSpace.add(fileItem);
-                        lblArchivoActual.setText("Archivo actual: " + new File(fileName).getName()); // Update the label
-                        updateCharacterCount(); // Update the character count
+                        lblArchivoActual.setText("Archivo actual: " + new File(fileName).getName());
+                        updateCharacterCount();
                     }
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -175,28 +175,27 @@ public class Principal extends JFrame {
             }
         });
 
-        // Function to open a file
+        // Funcion de abrir archivo
         menuAbrirArchivo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 try {
                     String fileName = notepad.abrirArchivo();
                     if (fileName != null) {
                         textArea.setText(notepad.getFileContent(fileName));
-                        currentFileName = fileName; // Update the full path of the current file
-                        // Add a new item to the workspace menu
+                        currentFileName = fileName;
                         JMenuItem fileItem = new JMenuItem(new File(fileName).getName());
                         fileItem.addActionListener(event -> {
                             String content = notepad.getFileContent(fileName);
                             if (content != null) {
                                 textArea.setText(content);
-                                currentFileName = fileName; // Update the full path of the current file
-                                lblArchivoActual.setText("Archivo actual: " + new File(fileName).getName()); // Update the label
-                                updateCharacterCount(); // Update the character count
+                                currentFileName = fileName;
+                                lblArchivoActual.setText("Archivo actual: " + new File(fileName).getName());
+                                updateCharacterCount();
                             }
                         });
                         menuWorkSpace.add(fileItem);
-                        lblArchivoActual.setText("Archivo actual: " + new File(fileName).getName()); // Update the label
-                        updateCharacterCount(); // Update the character count
+                        lblArchivoActual.setText("Archivo actual: " + new File(fileName).getName());
+                        updateCharacterCount();
                     }
                 } catch (FileNotFoundException e1) {
                     e1.printStackTrace();
@@ -207,7 +206,7 @@ public class Principal extends JFrame {
             }
         });
 
-        // Function to save a file
+        // Funcion para guardar archivo
         menuGuardarArchivo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String content = textArea.getText();
@@ -227,7 +226,7 @@ public class Principal extends JFrame {
             }
         });
 
-        // Function to save as a file
+        // Funcion de guardar como
         menuGuardarComo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String content = textArea.getText();
@@ -241,7 +240,7 @@ public class Principal extends JFrame {
             }
         });
 
-        // Function to close the current file
+        // Funcion para cerrar archivo
         menuCerrarArchivo.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 if (currentFileName != null) {
@@ -260,10 +259,10 @@ public class Principal extends JFrame {
                                 break;
                             }
                         }
-                        currentFileName = null; // Clear the current file name
-                        textArea.setText(""); // Clear the text area
-                        lblArchivoActual.setText("Archivo actual: "); // Update the label
-                        lblContador.setText("Caracteres: 0"); // Reset the character count
+                        currentFileName = null; // Resetea el nombre del archivo actual
+                        textArea.setText(""); // Borra el contenido TextArea
+                        lblArchivoActual.setText("Archivo actual: "); // Actualiza el label de archivo actual
+                        lblContador.setText("Caracteres: 0"); // Resetea el contador de caracteres
                     }
                 } else {
                     JOptionPane.showMessageDialog(
