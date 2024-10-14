@@ -14,21 +14,27 @@ public class Notepad {
     private Map<String, String> fileContents;
 
     public Notepad() {
-        // Initialize the map to store file contents
+        // Aca se mapean los nombres de los archivos junto con su contenido
         fileContents = new HashMap<>();
     }
 
+    /**
+     * Guarda un archivo con el nombre fileName y el contenido content
+     * @param fileName
+     * @param content
+     * @throws IOException
+     */
     public void guardarArchivo(String fileName, String content) throws IOException {
         System.out.println("Saving file...");
 
-        // Create the file with the provided name
+        // Crea el archivo con el fileName que recibe como parametro
         File file = new File(fileName);
         System.out.println("Full file path: " + file.getAbsolutePath());
 
         try (FileWriter writer = new FileWriter(file)) {
             writer.write(content);
-            writer.flush(); // Ensure the content is written to the file
-            // Update the file content in the map
+            writer.flush();
+            // Actualiza el mapeo de archivos y su contenido
             fileContents.put(fileName, content);
             System.out.println("File saved: " + fileName);
         } catch (IOException e) {
@@ -37,6 +43,11 @@ public class Notepad {
         }
     }
 
+    /**
+     * Guarda un archivo con el nombre fileName y el contenido content
+     * @param content
+     * @throws IOException
+     */
     public void guardarArchivoConSeleccion(String content) throws IOException {
         System.out.println("Save file with selection...");
 
@@ -52,6 +63,11 @@ public class Notepad {
         }
     }
 
+    /**
+     * Guarda una copia del archivo con el mismo u otro nombre
+     * @param content
+     * @throws IOException
+     */
     public void guardarComo(String content) throws IOException {
         System.out.println("Save as...");
 
@@ -67,6 +83,11 @@ public class Notepad {
         }
     }
 
+    /**
+     * Abre un archivo y retorna su contenido
+     * @return
+     * @throws IOException
+     */
     public String abrirArchivo() throws IOException {
         System.out.println("Opening file...");
 
@@ -90,10 +111,23 @@ public class Notepad {
         return null;
     }
 
+	/**
+	 * Retorna el contenido de un archivo
+	 * 
+	 * @param fileName
+	 * @return
+	 */
     public String getFileContent(String fileName) {
         return fileContents.get(fileName);
     }
 
+	/**
+	 * Crea un nuevo archivo
+	 * 
+	 * @param content
+	 * @return
+	 * @throws IOException
+	 */
     public String nuevoArchivo(String content) throws IOException {
         System.out.println("New file...");
 
@@ -111,6 +145,10 @@ public class Notepad {
         return null;
     }
 
+    /**
+     * Cierra un archivo
+     * @param fileName
+     */
     public void cerrarArchivo(String fileName) {
         fileContents.remove(fileName);
     }
